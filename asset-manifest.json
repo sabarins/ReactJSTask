@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/sabarins/ReactJSTask/static/css/main.f855e6bc.css",
-    "main.js": "/sabarins/ReactJSTask/static/js/main.022de907.js",
+    "main.js": "/sabarins/ReactJSTask/static/js/main.7b8eec46.js",
     "static/js/453.006a604b.chunk.js": "/sabarins/ReactJSTask/static/js/453.006a604b.chunk.js",
     "index.html": "/sabarins/ReactJSTask/index.html",
     "main.f855e6bc.css.map": "/sabarins/ReactJSTask/static/css/main.f855e6bc.css.map",
-    "main.022de907.js.map": "/sabarins/ReactJSTask/static/js/main.022de907.js.map",
+    "main.7b8eec46.js.map": "/sabarins/ReactJSTask/static/js/main.7b8eec46.js.map",
     "453.006a604b.chunk.js.map": "/sabarins/ReactJSTask/static/js/453.006a604b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.022de907.js"
+    "static/js/main.7b8eec46.js"
   ]
 }
