@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/sabarins/ReactJSTask/static/css/main.f855e6bc.css",
-    "main.js": "/sabarins/ReactJSTask/static/js/main.7b8eec46.js",
-    "static/js/453.006a604b.chunk.js": "/sabarins/ReactJSTask/static/js/453.006a604b.chunk.js",
-    "index.html": "/sabarins/ReactJSTask/index.html",
-    "main.f855e6bc.css.map": "/sabarins/ReactJSTask/static/css/main.f855e6bc.css.map",
-    "main.7b8eec46.js.map": "/sabarins/ReactJSTask/static/js/main.7b8eec46.js.map",
-    "453.006a604b.chunk.js.map": "/sabarins/ReactJSTask/static/js/453.006a604b.chunk.js.map"
+    "main.css": "/ReactJSTask/static/css/main.f855e6bc.css",
+    "main.js": "/ReactJSTask/static/js/main.a39fe6d1.js",
+    "static/js/453.006a604b.chunk.js": "/ReactJSTask/static/js/453.006a604b.chunk.js",
+    "index.html": "/ReactJSTask/index.html",
+    "main.f855e6bc.css.map": "/ReactJSTask/static/css/main.f855e6bc.css.map",
+    "main.a39fe6d1.js.map": "/ReactJSTask/static/js/main.a39fe6d1.js.map",
+    "453.006a604b.chunk.js.map": "/ReactJSTask/static/js/453.006a604b.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.f855e6bc.css",
-    "static/js/main.7b8eec46.js"
+    "static/js/main.a39fe6d1.js"
   ]
 }
