@@ -10,7 +10,7 @@ function App() {
   return (
     <div className="App">
       {/* <Authusecontext.Provider value={{setUsrpassword,usrpassword}}> */}
-        <BrowserRouter>
+        <BrowserRouter basename="/ReactJSTask">
           <Routes>
             <Route path="/" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
