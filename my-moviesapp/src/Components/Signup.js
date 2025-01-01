@@ -16,7 +16,7 @@ import WavingHandIcon from "@mui/icons-material/WavingHand";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import { useNavigate } from "react-router-dom";
 
-function Signup(props) {
+function Signup() {
 
   const navigate = useNavigate();
 

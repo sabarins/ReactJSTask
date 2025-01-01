@@ -15,10 +15,10 @@ import Cookies from "js-cookie";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import { useNavigate } from "react-router-dom";
-import { Authusecontext } from "../App";
+// import { Authusecontext } from "../App";
 
-function Login(props) {
-  const { setUsrpassword } = useContext(Authusecontext) || "";
+function Login() {
+  // const { setUsrpassword } = useContext(Authusecontext) || "";
 
   const navigate = useNavigate();
   const [loguser, setLoguser] = useState([]);
@@ -32,7 +32,7 @@ function Login(props) {
       let getdata = new FormData(event.target);
       let data = Object.fromEntries(getdata.entries());
       let tmrypwd = data.password;
-      setUsrpassword(tmrypwd);
+      // setUsrpassword(tmrypwd);
       let hashedpwd = bcrypt.hashSync(data.password, 10);
       data.password = hashedpwd;
       console.log(data.email, typeof tmrypwd);
