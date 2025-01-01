@@ -1,5 +1,16 @@
 {
-    "rewrites": [
-      { "source": "/(.*)", "destination": "/" }
+    "routes": [
+        {
+            "src":"/",
+            "dest":"/"
+        },
+        {
+            "src":"/signup",
+            "dest":"/"
+        },
+        {
+            "src":"/dashboard",
+            "dest":"/"
+        }
     ]
-  }
+}
