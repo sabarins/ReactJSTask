@@ -1,123 +1,263 @@
-import React, {  useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { Grid2 } from "@mui/material";
+import { Button, CircularProgress, Grid2, Rating } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 
-import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
-import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
-import TheatersIcon from "@mui/icons-material/Theaters";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import CardMedia from "@mui/material/CardMedia";
+import Appbar from "./Appbar";
 
 function Dashboard() {
   //   const { usrpassword } = useContext(Authusecontext) || "";
   let navigate = useNavigate();
-  const [usrprofilename, setUsrprofilename] = useState([]);
 
-  //   console.log(typeof usrpassword.toString());
-  useEffect(() => {
-    let currentuser = JSON.parse(localStorage.getItem("userdatas"));
-    let dataloggeduserchchk = JSON.parse(Cookies.get("userloggedsession"));
-    setUsrprofilename(dataloggeduserchchk?.[0].email);
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-    console.log(dataloggeduserchchk);
+  const [searchinput, setSearchinput] = useState([]);
 
-    let match = currentuser?.filter(
-      (users) => users.email == dataloggeduserchchk?.[0].email
-    );
+  const handleSearch = (event) => {
+    event.preventDefault();
+    console.log(event.target);
+    const formtextdata = new FormData(event.target);
+    const getdata = Object.fromEntries(formtextdata.entries());
 
-    if (match?.length == 0 || !match) {
-      navigate("/");
-    }
-
-    // console.log(dataloggeduserchchk, currentuser, match);
-  }, []);
-
-  const handleLogoutchange = () => {
-    Cookies.remove('userloggedsession');
-    navigate("/");
+    setSearchinput(getdata.searchinput);
   };
 
+  console.log(searchinput);
+
+  useEffect(() => {
+    const fetchMovies = async () => {
+      try {
+        const response = await fetch(
+          searchinput.length == 0
+            ? `https://api.tvmaze.com/shows`
+            : `https://api.tvmaze.com/search/shows?q=${searchinput}`
+        );
+        if (!response.ok) {
+          throw new Error("Failed to fetch movies");
+        }
+        const data = await response.json();
+        console.log(data[0]);
+        setMovies(data.slice(0, 50));
+        setLoading(false);
+      } catch (err) {
+        console.log(err.message);
+        setLoading(false);
+      }
+    };
+
+    fetchMovies();
+  }, [searchinput]);
+
   return (
-    <Grid2 sx={{ bgcolor: "black" }}>
-      <AppBar position="static">
-        <Container maxWidth="xl">
-          <Toolbar disableGutters>
-            <TheatersIcon sx={{ display: { xs: "none", md: "flex" }, mr: 1 }} />
-            <Typography
-              variant="h6"
-              //   noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                // mr: 2,
-                display: { xs: "none", md: "flex" },
-                fontFamily: "monospace",
-                fontWeight: 700,
-                // letterSpacing: ".3rem",
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              MyMoviesApp
-            </Typography>
+    <Grid2>
+      {/* head  */}
+      <Appbar />
 
-            <TheatersIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
-            <Typography
-              variant="h5"
-              noWrap
-              component="a"
-              href="#app-bar-with-responsive-menu"
-              sx={{
-                mr: 2,
-                display: { xs: "flex", md: "none" },
-                flexGrow: 1,
-                fontFamily: "monospace",
-                fontWeight: 700,
-                color: "inherit",
-                textDecoration: "none",
-              }}
-            >
-              MyMoviesApp
-            </Typography>
+      <Box m={5}>
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            style={{
+              padding: "10px",
+              width: "50%",
+              justifyContent: "center",
+              fontSize: "20px",
+            }}
+            name="searchinput"
+            placeholder="type your favourite movie.."
+            width={"100%"}
+          ></input>
+          <Button
+            type="submit"
+            sx={{
+              bgcolor: "#1976d2",
+              color: "white",
+              padding: "11px",
+              textTransform: "none",
+              mt: -0.6,
+              borderRadius: 0,
+            }}
+          >
+            Search
+          </Button>
+        </form>
+      </Box>
 
-            <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {/* {pages.map((page) => (
-              <Button
-                key={page}
-                sx={{ my: 2, color: 'white', display: 'block' }}
-              >
-                {page}
-              </Button>
-            ))} */}
-            </Box>
-            <Box sx={{ flexGrow: 0 }}>
-              <Tooltip title={usrprofilename}>
-                <IconButton sx={{ p: 0 }}>
-                  <Avatar
-                    alt={usrprofilename}
-                    src="/static/images/avatar/2.jpg"
-                  />
-                </IconButton>
-              </Tooltip>
-              <Button
-                type="submit"
-                sx={{ bgcolor: "red", color: "white", ml: 2 }}
-                onClick={handleLogoutchange}
-              >
-                Logout
-              </Button>
-            </Box>
-          </Toolbar>
-        </Container>
-      </AppBar>
+      {/* desktop  */}
+      {loading ? (
+        <Typography variant="h5" fontWeight={"bold"} mt={2}>
+          Loading ...
+        </Typography>
+      ) : (
+        <>
+          {/* Desktop view  */}
+          <Grid2
+            container
+            sx={{ m: 10, display: { md: "flex", lg: "flex", xs: "none" } }}
+            spacing={4}
+            justifyContent="center"
+          >
+            {movies?.map((item, index) => {
+              return (
+                <Card maxWidth={300} key={index}>
+                  <a
+                    href={`/ReactJSTask/dashboardmovie/${
+                      item?.id ? item?.id : item?.show?.id
+                    }`}
+                  >
+                    <img src={item?.image?.original ? item?.image?.original : item?.show?.image?.original} width={300} height={300} />
+                  </a>
+                  <CardContent>
+                    <a
+                      href={`/ReactJSTask/dashboardmovie/${
+                        item?.id ? item?.id : item?.show?.id
+                      }`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Typography gutterBottom variant="h5" fontWeight={"bold"}>
+                        {item?.name ? item?.name : item?.show?.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        {item?.genres?.map((dis, ind) => {
+                          return <Typography>{dis + " "}</Typography>;
+                        })}
+
+                        {item?.show?.genres?.map((dis, ind) => {
+                          return <Typography>{dis + " "}</Typography>;
+                        })}
+                      </Typography>
+                    </a>
+                  </CardContent>
+                  <a
+                    href={`/ReactJSTask/dashboardmovie/${
+                      item?.id ? item?.id : item?.show?.id
+                    }`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <CardActions
+                      sx={{ display: "flex", justifyContent: "space-between",alignContent:"end" }}
+                    >
+                      <Box sx={{ bgcolor: "lightgray", borderRadius: "5px" }}>
+                        <Typography
+                          color="white"
+                          p={1}
+                          sx={{ fontSize: "10px", fontWeight: "bold" }}
+                        >
+                          {item?.premiered
+                            ? item?.premiered
+                            : item?.show?.premiered}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Rating
+                          name="half-rating"
+                          value={item?.rating?.average / 5 ? item?.rating?.average / 5 : item?.show?.rating?.average / 5}
+                          readOnly
+                          precision={0.1}
+                          max={3}
+                        />
+                      </Box>
+                      {/* <Typography size="small">Learn More</Typography> */}
+                    </CardActions>
+                  </a>
+                </Card>
+              );
+            })}
+          </Grid2>
+
+          {/* mobile view  */}
+          <Grid2
+            container
+            sx={{ m: 5, display: { md: "none", lg: "none", xs: "block" } }}
+            justifyContent="center"
+          >
+            {movies?.map((item, index) => {
+              return (
+                <Card sx={{ width: "100%", mb: 5 }} key={index}>
+                  <a
+                    href={`/ReactJSTask/dashboardmovie/${
+                      item?.id ? item?.id : item?.show?.id
+                    }`}
+                  >
+                    <img src={item?.image?.original} width={300} height={300} />
+                  </a>
+                  <CardContent>
+                    <a
+                      href={`/ReactJSTask/dashboardmovie/${
+                        item?.id ? item?.id : item?.show?.id
+                      }`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <Typography gutterBottom variant="h5" fontWeight={"bold"}>
+                        {item?.name ? item?.name : item?.show?.name}
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        sx={{ color: "text.secondary" }}
+                      >
+                        {item?.genres?.map((dis, ind) => {
+                          return <Typography>{dis + " "}</Typography>;
+                        })}
+
+                        {item?.show?.genres?.map((dis, ind) => {
+                          return <Typography>{dis + " "}</Typography>;
+                        })}
+                      </Typography>
+                    </a>
+                  </CardContent>
+                  <a
+                    href={`/ReactJSTask/dashboardmovie/${
+                      item?.id ? item?.id : item?.show?.id
+                    }`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    <CardActions
+                      sx={{ display: "flex", justifyContent: "space-between" }}
+                    >
+                      <Box sx={{ bgcolor: "lightgray", borderRadius: "5px" }}>
+                        <Typography
+                          color="white"
+                          p={1}
+                          sx={{ fontSize: "10px", fontWeight: "bold" }}
+                        >
+                          {item?.ended ? item?.ended : item?.show?.ended}
+                        </Typography>
+                      </Box>
+                      <Box>
+                        <Rating
+                          name="half-rating"
+                          value={item?.rating?.average / 5}
+                          readOnly
+                          precision={0.1}
+                          max={3}
+                        />
+                      </Box>
+                      {/* <Typography size="small">Learn More</Typography> */}
+                    </CardActions>
+                  </a>
+                </Card>
+              );
+            })}
+          </Grid2>
+        </>
+      )}
     </Grid2>
   );
 }
 
 export default Dashboard;
+
+

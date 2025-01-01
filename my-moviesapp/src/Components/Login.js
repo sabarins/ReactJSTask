@@ -52,7 +52,7 @@ function Login() {
       if (match?.length > 0) {
         Cookies.set("userloggedsession", JSON.stringify(match), { expires: 1 });
         // localStorage.setItem("userlogged", JSON.stringify(match));
-        navigate("/dashboard");
+        navigate("/dashboardmovie");
       } else if (!match || match?.length === 0) {
         setLoginwrong(true);
       }
