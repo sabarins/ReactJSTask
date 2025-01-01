@@ -78,7 +78,7 @@ function Login() {
           <Grid size={{ lg: 5.5, xs: 12 }}>
             <Box sx={{ display: "flex", alignContent: "center" }}>
               <img
-                src="/LoginImg/login_img.png"
+                src="https://sabarins.github.io/ReactJSTask/LoginImg/login_img.png"
                 width="100%"
                 style={{
                   border: "0px solid grey",
