@@ -118,68 +118,66 @@ function Dashboard() {
                     item?.id ? item?.id : item?.show?.id
                   }`}
                 >
-                 
-                    <img
-                      src={
-                        item?.image?.original
-                          ? item?.image?.original
-                          : item?.show?.image?.original
-                      }
-                      width={300}
-                      height={300}
-                    />
+                  <img
+                    src={
+                      item?.image?.original
+                        ? item?.image?.original
+                        : item?.show?.image?.original
+                    }
+                    width={300}
+                    height={300}
+                  />
                   <CardContent>
-                    
-                      <Typography gutterBottom variant="h5" fontWeight={"bold"}>
-                        {item?.name ? item?.name : item?.show?.name}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: "text.secondary" }}
-                      >
-                        {item?.genres?.map((dis, ind) => {
-                          return <Typography>{dis + " "}</Typography>;
-                        })}
-
-                        {item?.show?.genres?.map((dis, ind) => {
-                          return <Typography>{dis + " "}</Typography>;
-                        })}
-                      </Typography>
-                  </CardContent>
-              
-                    <CardActions
-                      sx={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignContent: "end",
-                      }}
+                    <Typography gutterBottom variant="h5" fontWeight={"bold"}>
+                      {item?.name ? item?.name : item?.show?.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
                     >
-                      <Box sx={{ bgcolor: "lightgray", borderRadius: "5px" }}>
-                        <Typography
-                          color="white"
-                          p={1}
-                          sx={{ fontSize: "10px", fontWeight: "bold" }}
-                        >
-                          {item?.premiered
-                            ? item?.premiered
-                            : item?.show?.premiered}
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <Rating
-                          name="half-rating"
-                          value={
-                            item?.rating?.average / 5
-                              ? item?.rating?.average / 5
-                              : item?.show?.rating?.average / 5
-                          }
-                          readOnly
-                          precision={0.1}
-                          max={3}
-                        />
-                      </Box>
-                      {/* <Typography size="small">Learn More</Typography> */}
-                    </CardActions>
+                      {item?.genres?.map((dis, ind) => {
+                        return <Typography>{dis + " "}</Typography>;
+                      })}
+
+                      {item?.show?.genres?.map((dis, ind) => {
+                        return <Typography>{dis + " "}</Typography>;
+                      })}
+                    </Typography>
+                  </CardContent>
+
+                  <CardActions
+                    sx={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignContent: "end",
+                    }}
+                  >
+                    <Box sx={{ bgcolor: "lightgray", borderRadius: "5px" }}>
+                      <Typography
+                        color="white"
+                        p={1}
+                        sx={{ fontSize: "10px", fontWeight: "bold" }}
+                      >
+                        {item?.premiered
+                          ? item?.premiered
+                          : item?.show?.premiered}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Rating
+                        name="half-rating"
+                        value={
+                          item?.rating?.average / 5
+                            ? item?.rating?.average / 5
+                            : item?.show?.rating?.average / 5
+                        }
+                        readOnly
+                        precision={0.1}
+                        max={3}
+                      />
+                    </Box>
+                    {/* <Typography size="small">Learn More</Typography> */}
+                  </CardActions>
                 </Card>
               );
             })}
@@ -193,55 +191,57 @@ function Dashboard() {
           >
             {movies?.map((item, index) => {
               return (
-                <Card sx={{ width: "100%", mb: 5 }} key={index}  style={{ textDecoration: "none" }}
-                component={"a"}
-                href={`https://sabarins.github.io/ReactJSTask/dashboardmovie/${
-                  item?.id ? item?.id : item?.show?.id
-                }`}>
-                
-                    <img src={item?.image?.original} width={300} height={300} />
+                <Card
+                  sx={{ width: "100%", mb: 5 }}
+                  key={index}
+                  style={{ textDecoration: "none" }}
+                  component={"a"}
+                  href={`https://sabarins.github.io/ReactJSTask/dashboardmovie/${
+                    item?.id ? item?.id : item?.show?.id
+                  }`}
+                >
+                  <img src={item?.image?.original} width={300} height={300} />
                   <CardContent>
-                  
-                      <Typography gutterBottom variant="h5" fontWeight={"bold"}>
-                        {item?.name ? item?.name : item?.show?.name}
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        sx={{ color: "text.secondary" }}
-                      >
-                        {item?.genres?.map((dis, ind) => {
-                          return <Typography>{dis + " "}</Typography>;
-                        })}
-
-                        {item?.show?.genres?.map((dis, ind) => {
-                          return <Typography>{dis + " "}</Typography>;
-                        })}
-                      </Typography>
-                  </CardContent>
-                 
-                    <CardActions
-                      sx={{ display: "flex", justifyContent: "space-between" }}
+                    <Typography gutterBottom variant="h5" fontWeight={"bold"}>
+                      {item?.name ? item?.name : item?.show?.name}
+                    </Typography>
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "text.secondary" }}
                     >
-                      <Box sx={{ bgcolor: "lightgray", borderRadius: "5px" }}>
-                        <Typography
-                          color="white"
-                          p={1}
-                          sx={{ fontSize: "10px", fontWeight: "bold" }}
-                        >
-                          {item?.ended ? item?.ended : item?.show?.ended}
-                        </Typography>
-                      </Box>
-                      <Box>
-                        <Rating
-                          name="half-rating"
-                          value={item?.rating?.average / 5}
-                          readOnly
-                          precision={0.1}
-                          max={3}
-                        />
-                      </Box>
-                      {/* <Typography size="small">Learn More</Typography> */}
-                    </CardActions>
+                      {item?.genres?.map((dis, ind) => {
+                        return <Typography>{dis + " "}</Typography>;
+                      })}
+
+                      {item?.show?.genres?.map((dis, ind) => {
+                        return <Typography>{dis + " "}</Typography>;
+                      })}
+                    </Typography>
+                  </CardContent>
+
+                  <CardActions
+                    sx={{ display: "flex", justifyContent: "space-between" }}
+                  >
+                    <Box sx={{ bgcolor: "lightgray", borderRadius: "5px" }}>
+                      <Typography
+                        color="white"
+                        p={1}
+                        sx={{ fontSize: "10px", fontWeight: "bold" }}
+                      >
+                        {item?.ended ? item?.ended : item?.show?.ended}
+                      </Typography>
+                    </Box>
+                    <Box>
+                      <Rating
+                        name="half-rating"
+                        value={item?.rating?.average / 5}
+                        readOnly
+                        precision={0.1}
+                        max={3}
+                      />
+                    </Box>
+                    {/* <Typography size="small">Learn More</Typography> */}
+                  </CardActions>
                 </Card>
               );
             })}
