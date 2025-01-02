@@ -224,7 +224,10 @@ function Signup() {
                   <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Typography>
                       Already have an account?
-                      <Button sx={{ textTransform: "none" }}>Sign in</Button>
+                      <Button sx={{ textTransform: "none" }} onClick={()=>{
+                          navigate("/");
+                      
+                      }}>Sign in</Button>
                     </Typography>
                   </Box>
                 </form>

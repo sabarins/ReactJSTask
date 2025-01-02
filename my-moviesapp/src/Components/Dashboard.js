@@ -109,21 +109,27 @@ function Dashboard() {
           >
             {movies?.map((item, index) => {
               return (
-                <Card maxWidth={300} key={index}>
-                  <a
-                    href={`/dashboardmovie/${
-                      item?.id ? item?.id : item?.show?.id
-                    }`}
-                  >
-                    <img src={item?.image?.original ? item?.image?.original : item?.show?.image?.original} width={300} height={300} />
-                  </a>
+                <Card
+                  maxWidth={300}
+                  key={index}
+                  style={{ textDecoration: "none" }}
+                  component={"a"}
+                  href={`https://sabarins.github.io/ReactJSTask/dashboardmovie/${
+                    item?.id ? item?.id : item?.show?.id
+                  }`}
+                >
+                 
+                    <img
+                      src={
+                        item?.image?.original
+                          ? item?.image?.original
+                          : item?.show?.image?.original
+                      }
+                      width={300}
+                      height={300}
+                    />
                   <CardContent>
-                    <a
-                      href={`/dashboardmovie/${
-                        item?.id ? item?.id : item?.show?.id
-                      }`}
-                      style={{ textDecoration: "none" }}
-                    >
+                    
                       <Typography gutterBottom variant="h5" fontWeight={"bold"}>
                         {item?.name ? item?.name : item?.show?.name}
                       </Typography>
@@ -139,16 +145,14 @@ function Dashboard() {
                           return <Typography>{dis + " "}</Typography>;
                         })}
                       </Typography>
-                    </a>
                   </CardContent>
-                  <a
-                    href={`/dashboardmovie/${
-                      item?.id ? item?.id : item?.show?.id
-                    }`}
-                    style={{ textDecoration: "none" }}
-                  >
+              
                     <CardActions
-                      sx={{ display: "flex", justifyContent: "space-between",alignContent:"end" }}
+                      sx={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignContent: "end",
+                      }}
                     >
                       <Box sx={{ bgcolor: "lightgray", borderRadius: "5px" }}>
                         <Typography
@@ -164,7 +168,11 @@ function Dashboard() {
                       <Box>
                         <Rating
                           name="half-rating"
-                          value={item?.rating?.average / 5 ? item?.rating?.average / 5 : item?.show?.rating?.average / 5}
+                          value={
+                            item?.rating?.average / 5
+                              ? item?.rating?.average / 5
+                              : item?.show?.rating?.average / 5
+                          }
                           readOnly
                           precision={0.1}
                           max={3}
@@ -172,7 +180,6 @@ function Dashboard() {
                       </Box>
                       {/* <Typography size="small">Learn More</Typography> */}
                     </CardActions>
-                  </a>
                 </Card>
               );
             })}
@@ -186,21 +193,15 @@ function Dashboard() {
           >
             {movies?.map((item, index) => {
               return (
-                <Card sx={{ width: "100%", mb: 5 }} key={index}>
-                  <a
-                    href={`/ReactJSTask/dashboardmovie/${
-                      item?.id ? item?.id : item?.show?.id
-                    }`}
-                  >
+                <Card sx={{ width: "100%", mb: 5 }} key={index}  style={{ textDecoration: "none" }}
+                component={"a"}
+                href={`https://sabarins.github.io/ReactJSTask/dashboardmovie/${
+                  item?.id ? item?.id : item?.show?.id
+                }`}>
+                
                     <img src={item?.image?.original} width={300} height={300} />
-                  </a>
                   <CardContent>
-                    <a
-                      href={`/ReactJSTask/dashboardmovie/${
-                        item?.id ? item?.id : item?.show?.id
-                      }`}
-                      style={{ textDecoration: "none" }}
-                    >
+                  
                       <Typography gutterBottom variant="h5" fontWeight={"bold"}>
                         {item?.name ? item?.name : item?.show?.name}
                       </Typography>
@@ -216,14 +217,8 @@ function Dashboard() {
                           return <Typography>{dis + " "}</Typography>;
                         })}
                       </Typography>
-                    </a>
                   </CardContent>
-                  <a
-                    href={`/ReactJSTask/dashboardmovie/${
-                      item?.id ? item?.id : item?.show?.id
-                    }`}
-                    style={{ textDecoration: "none" }}
-                  >
+                 
                     <CardActions
                       sx={{ display: "flex", justifyContent: "space-between" }}
                     >
@@ -247,7 +242,6 @@ function Dashboard() {
                       </Box>
                       {/* <Typography size="small">Learn More</Typography> */}
                     </CardActions>
-                  </a>
                 </Card>
               );
             })}
@@ -259,5 +253,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-
-
