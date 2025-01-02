@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { Button, CircularProgress, Grid2, Rating } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
@@ -114,7 +114,7 @@ function Dashboard() {
                   key={index}
                   style={{ textDecoration: "none" }}
                   component={"a"}
-                  href={`https://sabarins.github.io/ReactJSTask/dashboardmovie/${
+                  href={`/ReactJSTask/dashboardmovie/${
                     item?.id ? item?.id : item?.show?.id
                   }`}
                 >
@@ -248,6 +248,9 @@ function Dashboard() {
           </Grid2>
         </>
       )}
+
+      <Outlet />
+
     </Grid2>
   );
 }
