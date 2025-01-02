@@ -113,7 +113,7 @@ function Dashboard() {
                   maxWidth={300}
                   key={index}
                   style={{ textDecoration: "none" }}
-                  onClick={()=>navigate(`/ReactJSTask/dashboardmovie/${
+                  onClick={()=>navigate(`/dashboardmovie/${
                     item?.id ? item?.id : item?.show?.id
                   }`)}
                   // component={"a"}
