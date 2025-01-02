@@ -111,7 +111,7 @@ function Dashboard() {
               return (
                 <Card maxWidth={300} key={index}>
                   <a
-                    href={`/ReactJSTask/dashboardmovie/${
+                    href={`/dashboardmovie/${
                       item?.id ? item?.id : item?.show?.id
                     }`}
                   >
@@ -119,7 +119,7 @@ function Dashboard() {
                   </a>
                   <CardContent>
                     <a
-                      href={`/ReactJSTask/dashboardmovie/${
+                      href={`/dashboardmovie/${
                         item?.id ? item?.id : item?.show?.id
                       }`}
                       style={{ textDecoration: "none" }}
@@ -142,7 +142,7 @@ function Dashboard() {
                     </a>
                   </CardContent>
                   <a
-                    href={`/ReactJSTask/dashboardmovie/${
+                    href={`/dashboardmovie/${
                       item?.id ? item?.id : item?.show?.id
                     }`}
                     style={{ textDecoration: "none" }}
