@@ -113,10 +113,13 @@ function Dashboard() {
                   maxWidth={300}
                   key={index}
                   style={{ textDecoration: "none" }}
-                  component={"a"}
-                  href={`/ReactJSTask/dashboardmovie/${
+                  onClick={()=>navigate(`/ReactJSTask/dashboardmovie/${
                     item?.id ? item?.id : item?.show?.id
-                  }`}
+                  }`)}
+                  // component={"a"}
+                  // href={`/ReactJSTask/dashboardmovie/${
+                  //   item?.id ? item?.id : item?.show?.id
+                  // }`}
                 >
                   <img
                     src={
@@ -248,8 +251,6 @@ function Dashboard() {
           </Grid2>
         </>
       )}
-
-      <Outlet />
 
     </Grid2>
   );

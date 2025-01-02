@@ -16,9 +16,8 @@ function App() {
             <Route path="/" element={<Login />}></Route>
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/dashboardmovie" element={<Dashboard />}>
-              <Route path='/dashboardmovie/:id' element={<Moviedetail />} />
             </Route>
-            {/* <Route path="/dashboardmovie/:id" element={<Moviedetail />}></Route> */}
+            <Route path="/dashboardmovie/:id" element={<Moviedetail />}></Route>
           </Routes>
         </BrowserRouter>
       {/* </Authusecontext.Provider> */}
