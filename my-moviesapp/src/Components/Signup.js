@@ -15,9 +15,9 @@ import bcrypt from "bcryptjs";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 import CopyrightIcon from "@mui/icons-material/Copyright";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 function Signup() {
-
   const navigate = useNavigate();
 
   const [regusers, setRegusers] = useState(
@@ -26,17 +26,30 @@ function Signup() {
   const [showalreadyacc, setShowalreadyacc] = useState(false);
 
   useEffect(() => {
+    let dataloggeduserchchk = Cookies?.get("userloggedsession")
+      ? JSON.parse(Cookies?.get("userloggedsession"))
+      : null;
+
+    if (dataloggeduserchchk?.length > 0) {
+      navigate("/dashboardmovie");
+    }
+  }, []);
+
+  useEffect(() => {
     let localdata = JSON.parse(localStorage.getItem("userdatas"));
     if (localdata) {
       setRegusers(localdata);
     }
   }, []);
 
-
   const [open, setOpen] = useState(false);
 
-  const handleClick = () => {
-    setOpen(true);
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+
+    setOpen(false);
   };
 
   const signuphandleChange = (event) => {
@@ -62,15 +75,15 @@ function Signup() {
 
       // new register users stored to local storage
       localStorage.setItem("userdatas", JSON.stringify(datas));
-
-      handleClick();
-
-      navigate('/');
+      setOpen(true);
+      setTimeout(() => {
+        navigate('/');
+      }, 3000);
+      // navigate("/");
     } else if (match?.length > 0) {
       setShowalreadyacc(true);
     }
 
-    console.log(match);
 
     event.target.reset();
   };
@@ -84,15 +97,13 @@ function Signup() {
     >
       <Container maxWidth="xl">
         <Grid container columnSpacing={2} p={3} mt={2}>
-          <Snackbar
-            open={open}
-            autoHideDuration={2000}
-          >
+          <Snackbar open={open} onClose={handleClose} autoHideDuration={3000} sx={{display:"flex",mt:{lg:-80,md:-80},top:{md:10,lg:10},ml:{lg:70,md:70}}}>
             <Alert
               // onClose={handleClose}
               severity="success"
               variant="filled"
-              sx={{ width: "100%" }}
+              sx={{ width: "100%", }}
+            
             >
               Account created successfully
             </Alert>
@@ -130,10 +141,10 @@ function Signup() {
                 </Typography>
 
                 <Box>
-                  <Typography>
+                  <Typography fontSize={{xs:"15px"}} mb={2}>
                     Today is a new day. It's your day. Your shape it.
                   </Typography>
-                  <Typography>
+                  <Typography sx={{fontWeight:'bold'}}>
                     Sign up to start managing your projects.
                   </Typography>
                 </Box>
@@ -224,10 +235,14 @@ function Signup() {
                   <Box sx={{ display: "flex", justifyContent: "center" }}>
                     <Typography>
                       Already have an account?
-                      <Button sx={{ textTransform: "none" }} onClick={()=>{
+                      <Button
+                        sx={{ textTransform: "none" }}
+                        onClick={() => {
                           navigate("/");
-                      
-                      }}>Sign in</Button>
+                        }}
+                      >
+                        Sign in
+                      </Button>
                     </Typography>
                   </Box>
                 </form>

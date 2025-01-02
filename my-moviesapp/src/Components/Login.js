@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Box,
   Button,
@@ -24,18 +24,27 @@ function Login() {
   const [loguser, setLoguser] = useState([]);
   const [loginwrong, setLoginwrong] = useState(false);
 
+  useEffect(() => {
+    let dataloggeduserchchk = Cookies?.get("userloggedsession")
+      ? JSON.parse(Cookies?.get("userloggedsession"))
+      : null;
+
+    if (dataloggeduserchchk?.length > 0) {
+      navigate("/dashboardmovie");
+    }
+  }, []);
+
   const loginhandleChange = (event) => {
     try {
       console.log("1");
       event.preventDefault();
-      console.log(event.target);
+      // console.log(event.target);
       let getdata = new FormData(event.target);
       let data = Object.fromEntries(getdata.entries());
       let tmrypwd = data.password;
       // setUsrpassword(tmrypwd);
       let hashedpwd = bcrypt.hashSync(data.password, 10);
       data.password = hashedpwd;
-      console.log(data.email, typeof tmrypwd);
 
       let getregisteredusers = JSON.parse(localStorage.getItem("userdatas"));
       console.log("2");
@@ -46,8 +55,6 @@ function Login() {
           bcrypt.compareSync(tmrypwd, users.password)
       );
 
-      console.log(match);
-  
 
       if (match?.length > 0) {
         Cookies.set("userloggedsession", JSON.stringify(match), { expires: 1 });
@@ -65,7 +72,6 @@ function Login() {
     navigate("/signup");
   };
 
-  console.log(loginwrong);
 
   return (
     <Stack
@@ -102,13 +108,13 @@ function Login() {
                   mt: 5,
                 }}
               >
-                <Typography variant="h4" sx={{ fontWeight: "bold" }}>
+                <Typography variant="h4" sx={{ fontWeight: "bold" }} fontSize={{xs:"30px"}}>
                   Welcome Back{" "}
-                  <WavingHandIcon sx={{ color: "#ffde6f", fontSize: "35px" }} />
+                  <WavingHandIcon sx={{ color: "#ffde6f", fontSize: {xs:"30px",lg:"35px",md:"35px"} }} />
                 </Typography>
 
                 <Box>
-                  <Typography>
+                  <Typography fontSize={{xs:"15px"}} mb={2}>
                     Today is a new day. It's your day. Your shape it.
                   </Typography>
                   <Typography fontWeight={"bold"}>

@@ -1,10 +1,11 @@
 import "./App.css";
 import Login from "./Components/Login";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Dashboard from "./Components/Dashboard";
 import Signup from "./Components/Signup";
 import Moviedetail from "./Components/Moviedetail";
-
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 function App() {
   

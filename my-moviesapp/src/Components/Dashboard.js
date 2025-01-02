@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
-import Cookies from "js-cookie";
 import { Button, CircularProgress, Grid2, Rating } from "@mui/material";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -25,14 +24,14 @@ function Dashboard() {
 
   const handleSearch = (event) => {
     event.preventDefault();
-    console.log(event.target);
+    // console.log(event.target);
     const formtextdata = new FormData(event.target);
     const getdata = Object.fromEntries(formtextdata.entries());
 
     setSearchinput(getdata.searchinput);
   };
 
-  console.log(searchinput);
+  // console.log(searchinput);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -46,7 +45,7 @@ function Dashboard() {
           throw new Error("Failed to fetch movies");
         }
         const data = await response.json();
-        console.log(data[0]);
+        // console.log(data[0]);
         setMovies(data.slice(0, 50));
         setLoading(false);
       } catch (err) {
@@ -63,13 +62,45 @@ function Dashboard() {
       {/* head  */}
       <Appbar />
 
-      <Box m={5}>
+      {/* desktop search  */}
+      <Box m={5} display={{ lg: "block", xs: "none", md: "block" }}>
         <form onSubmit={handleSearch}>
           <input
             type="text"
             style={{
               padding: "10px",
               width: "50%",
+              justifyContent: "center",
+              fontSize: "20px",
+            }}
+            name="searchinput"
+            placeholder="type your favourite movie.."
+            width={"100%"}
+          ></input>
+          <Button
+            type="submit"
+            sx={{
+              bgcolor: "#1976d2",
+              color: "white",
+              padding: "11px",
+              textTransform: "none",
+              mt: -0.6,
+              borderRadius: 0,
+            }}
+          >
+            Search
+          </Button>
+        </form>
+      </Box>
+
+      {/* mobile search  */}
+      <Box m={5} display={{ lg: "none", md: "none", xs: "flex" }}>
+        <form onSubmit={handleSearch}>
+          <input
+            type="text"
+            style={{
+              padding: "10px",
+              width: "70%",
               justifyContent: "center",
               fontSize: "20px",
             }}
@@ -113,9 +144,11 @@ function Dashboard() {
                   maxWidth={300}
                   key={index}
                   style={{ textDecoration: "none" }}
-                  onClick={()=>navigate(`/dashboardmovie/${
-                    item?.id ? item?.id : item?.show?.id
-                  }`)}
+                  onClick={() =>
+                    navigate(
+                      `/dashboardmovie/${item?.id ? item?.id : item?.show?.id}`
+                    )
+                  }
                   // component={"a"}
                   // href={`/ReactJSTask/dashboardmovie/${
                   //   item?.id ? item?.id : item?.show?.id
@@ -198,12 +231,21 @@ function Dashboard() {
                   sx={{ width: "100%", mb: 5 }}
                   key={index}
                   style={{ textDecoration: "none" }}
-                  component={"a"}
-                  href={`https://sabarins.github.io/ReactJSTask/dashboardmovie/${
-                    item?.id ? item?.id : item?.show?.id
-                  }`}
+                  onClick={() =>
+                    navigate(
+                      `/dashboardmovie/${item?.id ? item?.id : item?.show?.id}`
+                    )
+                  }
                 >
-                  <img src={item?.image?.original} width={300} height={300} />
+                  <img
+                    src={
+                      item?.image?.original
+                        ? item?.image?.original
+                        : item?.show?.image?.original
+                    }
+                    width={300}
+                    height={300}
+                  />
                   <CardContent>
                     <Typography gutterBottom variant="h5" fontWeight={"bold"}>
                       {item?.name ? item?.name : item?.show?.name}
@@ -231,13 +273,19 @@ function Dashboard() {
                         p={1}
                         sx={{ fontSize: "10px", fontWeight: "bold" }}
                       >
-                        {item?.ended ? item?.ended : item?.show?.ended}
+                        {item?.premiered
+                          ? item?.premiered
+                          : item?.show?.premiered}{" "}
                       </Typography>
                     </Box>
                     <Box>
                       <Rating
                         name="half-rating"
-                        value={item?.rating?.average / 5}
+                        value={
+                          item?.rating?.average / 5
+                            ? item?.rating?.average / 5
+                            : item?.show?.rating?.average / 5
+                        }
                         readOnly
                         precision={0.1}
                         max={3}
@@ -251,7 +299,6 @@ function Dashboard() {
           </Grid2>
         </>
       )}
-
     </Grid2>
   );
 }

@@ -24,7 +24,6 @@ function Moviedetail(props) {
     fetchdetailMovies();
   }, []);
 
-  console.log(moviedetails);
 
   return (
     <>
