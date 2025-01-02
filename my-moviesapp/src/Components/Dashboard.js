@@ -143,7 +143,8 @@ function Dashboard() {
                 <Card
                   maxWidth={300}
                   key={index}
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none",cursor:"pointer" }}
+                  
                   onClick={() =>
                     navigate(
                       `/dashboardmovie/${item?.id ? item?.id : item?.show?.id}`
@@ -230,7 +231,7 @@ function Dashboard() {
                 <Card
                   sx={{ width: "100%", mb: 5 }}
                   key={index}
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none" ,cursor:"pointer"}}
                   onClick={() =>
                     navigate(
                       `/dashboardmovie/${item?.id ? item?.id : item?.show?.id}`
