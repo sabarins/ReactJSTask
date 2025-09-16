@@ -29,7 +29,7 @@ jobs:
         uses: aws-actions/s3-sync@v2
         with:
           source-dir: build
-          bucket: ${{ secrets.AWS_S3_BUCKET }}
+          bucket: ${{ secrets.S3_BUCKET }}
           region: ${{ secrets.AWS_REGION }}
           delete: true
         env:
