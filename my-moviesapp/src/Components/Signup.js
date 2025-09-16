@@ -136,7 +136,7 @@ function Signup() {
                 }}
               >
                 <Typography variant="h4" sx={{ fontWeight: "bold" }}>
-                  Welcome{" "}
+                  Welcome Sabari{" "}
                   <WavingHandIcon sx={{ color: "#ffde6f", fontSize: "35px" }} />
                 </Typography>
 
